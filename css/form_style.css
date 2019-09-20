@@ -78,6 +78,14 @@ img {
   left: -1px;
 }
 
+#show_pass {
+  width: 100px;
+  height: 100px;
+  border: none;
+  background: url('http://127.0.0.1/Quiz/img/show_pass.png') no-repeat;
+  background-size: 20px 20px;
+}
+
 .focus + span::before {
   top: -5px;
 }
