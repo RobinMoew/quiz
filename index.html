@@ -19,22 +19,38 @@
       </div>
 
       <div class="txtb">
-        <input type="password" id="password" required />
         <button id="show_pass"></button>
+        <input type="password" id="password" required />
         <span data-placeholder="Password"></span>
       </div>
 
       <button class="logbtn">Login</button>
-      <div class="bottom-text">Don't have account? <a href="register.html">Sign up</a></div>
+      <div class="bottom-text">
+        Don't have account? <a href="register.html">Sign up</a>
+      </div>
     </div>
 
     <script type="text/javascript">
       $('.txtb input').on('focus', function() {
         $(this).addClass('focus');
+        $('#show_pass').show();
       });
 
       $('.txtb input').on('blur', function() {
-        if ($(this).val() == '') $(this).removeClass('focus');
+        if ($(this).val() == '') {
+          $(this).removeClass('focus');
+          $('#show_pass').hide();
+        }
+      });
+
+      $('#show_pass').click(() => {
+        if ($('#password').attr('type') == 'password') {
+          $('#password').attr('type', 'text');
+          $('#show_pass').attr('id', 'hide_pass');
+        } else {
+          $('#password').attr('type', 'password');
+          $('#hide_pass').attr('id', 'show_pass');
+        }
       });
     </script>
     <script src="js/login_ajax.js"></script>
