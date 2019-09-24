@@ -10,11 +10,10 @@ $('.logbtn').click(() => {
       password: password
     },
     success: function(result) {
-      if (result == 'quizz_menu.html') {
+      if (result == 'quiz_menu.html') {
         window.location = result;
       } else {
         alert('Bad username or password !');
-        password.val('');
       }
     },
     error: function(result) {

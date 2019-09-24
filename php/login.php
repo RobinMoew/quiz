@@ -20,7 +20,8 @@ $sql->bind_result($db_username, $db_password);
 
 if ($sql->fetch()) {
   if (password_verify($password, $db_password)) {
-    echo 'quizz_menu.html';
+    setcookie('Username', $db_username);
+    echo 'quiz_menu.html';
   } else {
     echo 'index.html';
   }

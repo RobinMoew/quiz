@@ -15,6 +15,7 @@ if (!$username || !$password || !$c_password) {
 // Check passwords match
 if ($password != $c_password) {
   echo "Passwords aren't matching";
+  die();
 }
 
 $db_username = null;

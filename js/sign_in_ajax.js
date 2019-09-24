@@ -16,7 +16,11 @@ $('.logbtn').click(() => {
       c_password: c_password
     },
     success: function(result) {
-      window.location = result;
+      if (result == 'index.html') {
+        window.location = result;
+      } else {
+        console.log(result);
+      }
     },
     error: function(result) {
       console.log(result);
