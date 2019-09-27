@@ -61,7 +61,7 @@ if ($_POST) {
 				<input type="password" placeholder="password" name="password"><br>
         <input id="button" type="submit" value="Login">
         </form>
-        <div id="register"><p>Not registered yet? </p> <a href="">  Register</a></div>
+        <div id="register"><p>Not registered yet? </p> <a href="php/sign_in.php">  Register</a></div>
         
 		</div>
  
