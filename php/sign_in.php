@@ -2,7 +2,6 @@
 if ($_POST) {
   include_once("connection.php");
 
-  // Get AJAX datas
   $username = $_POST["username"];
   $password = $_POST["password"]; 
   $c_password = $_POST["c_password"];
