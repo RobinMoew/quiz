@@ -55,10 +55,12 @@ if ($_POST) {
 			<div>Site<span>Quiz</span></div>
 		</div>
 		<br>
-		<div class="login">
-				<input type="text" placeholder="username" name="user"><br>
+		<div class="login" >
+      <form action="" method="POST">
+				<input type="text" placeholder="username" name="username"><br>
 				<input type="password" placeholder="password" name="password"><br>
-        <input type="button" value="Login">
+        <input id="button" type="submit" value="Login">
+        </form>
         <div id="register"><p>Not registered yet? </p> <a href="">  Register</a></div>
         
 		</div>
