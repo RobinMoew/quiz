@@ -1,8 +1,5 @@
 <?php
 session_start();
-
-if (isset($_SESSION['id']) && $_SESSION['id'] == 1) {
-  echo 'Salut admin !' . ' ' . $_SESSION['id'];
 ?>
 
 <!DOCTYPE html>
@@ -15,16 +12,13 @@ if (isset($_SESSION['id']) && $_SESSION['id'] == 1) {
   <title>Admin</title>
 </head>
 <body>
-  <div>
-    <select name="question_type" id="question_type">
-      <option selected>MCQ</option>
-      <option>Radio</option>
-      <option>Response</option>
-      <option>Numeric</option>
-    </select>
-  </div>
-  <div>
-    <button id="add_question">Add a question</button>
+  <?php
+  if (isset($_SESSION['id']) && $_SESSION['id'] == 1) {
+  echo 'Salut admin !';
+  ?>
+  <div id="message"></div>
+  <div id="quizs">
+    <button id="add_quiz">Add a quiz</button>
   </div>
   <div class="question"></div>
   <script src="../js/admin.js"></script>
