@@ -41,16 +41,29 @@ if ($_POST) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Log In</title>
 </head>
 <body>
-  <form action="" method="post">
-    <input type="text" name="username" placeholder="Pseudo">
-    <input type="password" name="password" placeholder="Password">
-    <input type="submit" value="Send">
-  </form> 
+<div class="body"></div>
+		<div class="grad"></div>
+		<div class="header">
+			<div>Site<span>Quiz</span></div>
+		</div>
+		<br>
+		<div class="login" >
+      <form action="" method="POST">
+				<input type="text" placeholder="username" name="username"><br>
+				<input type="password" placeholder="password" name="password"><br>
+        <input id="button" type="submit" value="Login">
+        </form>
+        <div id="register"><p>Not registered yet? </p> <a href="">  Register</a></div>
+        
+		</div>
+ 
 </body>
 </html>
