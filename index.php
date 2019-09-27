@@ -1,6 +1,6 @@
 <?php
 if ($_POST) {
-  include_once("connection.php");
+  include_once("php/connection.php");
 
   $username = $_POST['username'];
   $password = $_POST['password'];
@@ -25,10 +25,10 @@ if ($_POST) {
         session_start();
         $_SESSION['id'] = $db_id;
         $_SESSION['username'] = $db_username;
-        header('Location:quiz_menu.php');
+        header('Location:php/quiz_menu.php');
         exit();
       } else {
-        header('Location:login.php');
+        header('Location:index.php');
       }
     }
 
