@@ -119,7 +119,10 @@ $(document).ready(() => {
                 type: question_type_value,
                 quiz_name: quiz_name
               },
-              success: () => {},
+              success: (result) => {
+                result = JSON.parse(result);
+                console.log(result);
+              },
               error: (error) => {
                 console.log(error);
               }

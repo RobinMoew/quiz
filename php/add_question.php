@@ -16,10 +16,17 @@ if (!empty($question) AND !empty($type) AND !empty($quiz_name)) {
   $sql->fetch();
 }
 
+var_dump($question, $type, $db_quiz_id, $quiz_name);
+
 if (!empty($question) AND !empty($type) AND !empty($db_quiz_id)) {
   $sql = $connection->prepare("INSERT INTO questions(type, question, id_quiz) VALUES (?, ?, ?)");
   $sql->bind_param('ssi', $type, $question, $db_quiz_id);
   $sql->execute();
+
+  if (!$sql) {
+    echo "Error: " . $sql->error;
+  }
+
   echo 'Added';
 }
 $sql->close();
