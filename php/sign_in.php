@@ -19,7 +19,7 @@ if ($_POST) {
   $db_username = null;
 
   // Get 'usernames' from data base
-  $sql = $connection->prepare('SELECT login FROM users WHERE login = ?');
+  $sql = $connection->prepare('SELECT pseudo FROM users WHERE pseudo = ?');
   $sql->bind_param('s', $username);
   $sql->execute();
   if ($sql->fetch()) { // if there is a similar username in the data base
@@ -28,12 +28,12 @@ if ($_POST) {
   } else { // else add it to the data base
     $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = $connection->prepare("INSERT INTO users (login, password) VALUES(?, ?)");
+    $sql = $connection->prepare("INSERT INTO users (pseudo, password) VALUES(?, ?)");
     $sql->bind_param('ss', $username, $password_hashed);
     $sql->execute();
 
     if ($sql) {
-      header('Location:login.php');
+      header('Location:index.php');
     } else {
       echo "Error";
     }
@@ -53,7 +53,7 @@ if ($_POST) {
   <title>Sign In</title>
 </head>
 <body>
-  <form action="sign_in.php" method="post">
+  <form action="" method="post">
     <input type="text" name="username" placeholder="Pseudo"></input>
     <input type="password" name="password" placeholder="Password"></input>
     <input type="password" name="c_password" placeholder="Confirm password"></input>

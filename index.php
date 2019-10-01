@@ -15,7 +15,7 @@ if ($_POST) {
   }
 
   if (!empty($username)) {
-    $sql = $connection->prepare("SELECT id, login, password FROM users WHERE login = ?");
+    $sql = $connection->prepare("SELECT id, pseudo, password FROM users WHERE pseudo = ?");
     $sql->bind_param('s', $username);
     $sql->execute();
     $sql->bind_result($db_id, $db_username, $db_password);
