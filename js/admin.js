@@ -120,7 +120,6 @@ $(document).ready(() => {
                 quiz_name: quiz_name
               },
               success: (result) => {
-                result = JSON.parse(result);
                 console.log(result);
               },
               error: (error) => {
