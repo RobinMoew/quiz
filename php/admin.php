@@ -18,7 +18,7 @@ session_start();
   ?>
   <div id="message"></div>
   <div id="quizs">
-    <button id="add_quiz">Add a quiz</button>
+    <button id="add_quiz_name">Add a quiz</button>
   </div>
   <div class="question"></div>
   <script src="../js/admin.js"></script>

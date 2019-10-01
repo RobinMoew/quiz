@@ -1,14 +1,38 @@
 $(document).ready(() => {
   let nb_quiz = 0;
-  $('#add_quiz').click(() => {
+  let quiz_name = null;
+  $('#add_quiz_name').click(() => {
     nb_quiz++;
-    $('#add_quiz').hide();
+    $('#add_quiz_name').hide();
     $('#quizs').append(`
       <label for="quiz${nb_quiz}">Quiz name: </label>
-      <input type="text" name="quiz${nb_quiz}" id="quiz${nb_quiz} class="quiz">
+      <input type="text" name="quiz${nb_quiz}" id="quiz${nb_quiz}" class="quiz">
+      <input type="button" value="Add quiz" id="add_quiz">
     `);
 
-    $('.question').append(`
+    $('#add_quiz').click(() => {
+      quiz_name = $('#quiz' + nb_quiz).val();
+      $.ajax({
+        url: '../php/add_quiz.php',
+        type: 'POST',
+        data: {
+          quiz_name: quiz_name
+        },
+        success: (result) => {
+          if (result) {
+            console.log(result);
+          } else {
+            $('#quizs').html(`
+            <div>Quiz name added !</div>
+          `);
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+
+      $('.question').append(`
       <div>
         <label>Type: </label>
         <select name="question_type" id="question_type">
@@ -27,84 +51,86 @@ $(document).ready(() => {
       <button id="add_answer">Add an answer</button>
     `);
 
-    let question_type_value = $('#question_type').val();
+      let question_type_value = $('#question_type').val();
 
-    $('#question_type').change(() => {
-      question_type_value = $('#question_type').val();
-    });
+      $('#question_type').change(() => {
+        question_type_value = $('#question_type').val();
+      });
 
-    let nb_answer = 0;
+      let nb_answer = 0;
 
-    $('#add_answer').click(() => {
-      nb_answer++;
+      $('#add_answer').click(() => {
+        nb_answer++;
 
-      if (question_type_value == 'MCQ') {
-        $('#question_form').append(`
+        if (question_type_value == 'MCQ') {
+          $('#question_form').append(`
             <label>Answer ${nb_answer}</label>
             <input type='text' name='answer${nb_answer}' id='answer${nb_answer}' class='a'><br>
           `);
 
-        if (nb_answer == 4) {
-          $('#add_answer').hide();
-          $('#question_form').append(`
+          if (nb_answer == 4) {
+            $('#add_answer').hide();
+            $('#question_form').append(`
             <button id="valid">Add question</button>
           `);
-        }
-      } else if (question_type_value == 'Radio') {
-        $('#question_form').append(`
+          }
+        } else if (question_type_value == 'Radio') {
+          $('#question_form').append(`
           <label>Answer ${nb_answer}</label>
           <input type='text' name='answer${nb_answer}' id='answer${nb_answer}' class='a'><br>
         `);
 
-        if (nb_answer == 4) {
-          $('#add_answer').hide();
-          $('#question_form').append(`
+          if (nb_answer == 4) {
+            $('#add_answer').hide();
+            $('#question_form').append(`
             <button id="valid">Add question</button>
           `);
-        }
-      } else if (question_type_value == 'Response') {
-        $('#question_form').append(`
+          }
+        } else if (question_type_value == 'Response') {
+          $('#question_form').append(`
           <label>Answer ${nb_answer}</label>
           <textarea name='answer${nb_answer}' id='answer${nb_answer}' class='a'></textarea><br>
           <button id="valid">Add question</button>
         `);
 
-        $('#add_answer').hide();
-      } else if (question_type_value == 'Numeric') {
-        $('#question_form').append(`
+          $('#add_answer').hide();
+        } else if (question_type_value == 'Numeric') {
+          $('#question_form').append(`
           <label>Answer ${nb_answer}</label>
           <input type="number" name='answer${nb_answer}' id='answer${nb_answer}' class='a'><br>
           <button id="valid">Add question</button>
         `);
 
-        $('#add_answer').hide();
-      }
+          $('#add_answer').hide();
+        }
 
-      $('#valid').click(() => {
-        let question = $('#question').val();
-        if (question == '') {
-          $('#message').html(`
+        $('#valid').click(() => {
+          let question = $('#question').val();
+          if (question == '') {
+            $('#message').html(`
                   <div>Insert a question!</div>
                 `);
-        } else {
-          $.ajax({
-            url: 'http://localhost/quiz/php/add_question.php',
-            type: 'POST',
-            data: {
-              question: question,
-              type: question_type_value
-            },
-            success: () => {
-              //window.location.replace('admin.php');
-            },
-            error: (result) => {
-              console.log(result);
-            }
-          });
-        }
+          } else {
+            $.ajax({
+              url: '../php/add_question.php',
+              type: 'POST',
+              data: {
+                question: question,
+                type: question_type_value,
+                quiz_name: quiz_name
+              },
+              success: () => {},
+              error: (error) => {
+                console.log(error);
+              }
+            });
+          }
+        });
       });
+    });
+  });
 
-      /* $('#valid').click(() => {
+  /* $('#valid').click(() => {
           let inputs = $('.a');
           let answers = [];
 
@@ -132,6 +158,4 @@ $(document).ready(() => {
             }
           }
         }); */
-    });
-  });
 });

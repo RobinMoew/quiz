@@ -4,15 +4,24 @@ header("Access-Control-Allow-Origin: *");
 
 $question = $_POST['question'];
 $type = $_POST['type'];
+$quiz_name = $_POST['quiz_name'];
 
-if (isset($question) AND isset($type)) {
-  $sql = $connection->prepare("INSERT INTO questions(type, question) VALUES (?, ?)");
-  $sql->bind_param('ss', $type, $question);
+$db_quiz_id = null;
+
+if (!empty($question) AND !empty($type) AND !empty($quiz_name)) {
+  $sql = $connection->prepare("SELECT id FROM quizs WHERE nom = ?");
+  $sql->bind_param('s', $quiz_name);
   $sql->execute();
-  $sql->close();
-  $connection->close();
-  echo 'Added';
-} else {
-  echo 'Error';
+  $sql->bind_result($db_quiz_id);
+  $sql->fetch();
 }
+
+if (!empty($question) AND !empty($type) AND !empty($db_quiz_id)) {
+  $sql = $connection->prepare("INSERT INTO questions(type, question, id_quiz) VALUES (?, ?, ?)");
+  $sql->bind_param('ssi', $type, $question, $db_quiz_id);
+  $sql->execute();
+  echo 'Added';
+}
+$sql->close();
+$connection->close();
 ?>
